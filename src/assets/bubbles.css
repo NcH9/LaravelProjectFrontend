@@ -1,0 +1,101 @@
+
+
+.bubble {
+    display: grid;
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+    padding: 10px;
+    margin: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Courier New', Courier, monospace;
+}
+.bubble button {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+}
+.bubble button:hover {
+    background-color: rgb(219, 219, 219);
+    transition: 0.5s;
+}
+
+.right_bubble {
+    display: grid;
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px 0px 0 25px;
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Courier New', Courier, monospace;
+}
+.right_bubble button {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 25px;
+    color: rgba(255, 70, 70, 0.75);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+}
+.right_bubble a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.75);
+    font-family: 'Courier New', Courier, monospace;
+}
+.right_bubble button:hover {
+    background-color: rgb(219, 219, 219);
+    transition: 0.5s;
+}
+
+.left_bubble {
+    display: grid;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0 25px 25px 0;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Courier New', Courier, monospace;
+}
+.left_bubble button {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+}
+.left_bubble button:hover {
+    background-color: rgb(219, 219, 219);
+    transition: 0.5s;
+}
+.right_bubble .reservation_bubble {
+    display: flex;
+    justify-content: center;
+    /* background-color: rgb(255, 255, 255); */
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.75), rgba(200, 200, 200, 0.1));
+    border-radius: 25px 0px 0 25px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Courier New', Courier, monospace;
+}
+.right_bubble .reservation_bubble:hover {
+    cursor: pointer;
+    background-color: rgba(214, 233, 215, 0.75);
+    border-radius: 25px 0 0 25px;
+    transition: 0.5s;
+}
+
+span.user {
+    color: rgb(48, 255, 29);
+    font-weight: bold;
+}

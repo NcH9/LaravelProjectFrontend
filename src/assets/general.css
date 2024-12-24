@@ -1,0 +1,47 @@
+.grid1 {
+    display: grid;
+}
+.grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+}
+.grid2 .grid1 {
+    margin-right: 25px
+}
+.flex_center {
+    display: flex;
+    justify-content: center;
+    place-items: center;
+}
+.flex_top {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.flex_between {
+    display: flex;
+    justify-content: space-between;
+}
+.flex_right {
+    display: flex;
+    justify-content: flex-end;
+}
+.flex_left {
+    display: flex;
+    justify-content: flex-start;
+}
+.flex_fat {
+    flex: 1;
+}
+.error {
+    color: rgba(255, 50, 50, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.red {
+    color: rgba(255, 50, 50, 0.75);
+}
+.green {
+    color: rgba(38, 195, 38, 0.75);
+}
