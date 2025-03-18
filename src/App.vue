@@ -23,7 +23,7 @@ import auth from "./components/auth.vue";
         <RouterView />
       <footer class="flex_center">
         <RouterLink class="flex_center" to="/about">About</RouterLink>
-        <p>© 2024 Hotel "VASHA REKLAMA"</p>
+        <p>© 2024 Hotel "HELLO WORLD"</p>
       </footer>
     </div>
     

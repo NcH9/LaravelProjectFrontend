@@ -1,15 +1,21 @@
 <template>
     <div class="flex_right">
         <div v-if="reservations.length != 0" class="right_bubble">
-            <div class="flex_center">
-                <button @click="prevPage" :disabled="!prevPageUrl">Previous</button>
-                <span>Page {{ currentPage }} of {{ totalPages }}</span>
-                <button @click="nextPage" :disabled="!nextPageUrl">Next</button>
-            </div>
-            <div class="flex_center">
-                <button @click="sortData('room_id')">Sort by room</button>
-                <button @click="sortData('reservation_start')">Sort by start date</button>
-                <button @click="sortData('reservation_end')">Sort by end date</button>
+            <div class="grid1" v-if="reservations.length >= 10">
+                <div class="flex_center">
+                    <div class="flex_center">
+                        <button @click="prevPage" :disabled="!prevPageUrl">Previous</button>
+                    </div>
+                    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+                    <div class="flex_center">
+                        <button @click="nextPage" :disabled="!nextPageUrl">Next</button>
+                    </div>
+                </div>
+                <div class="flex_center">
+                    <button @click="sortData('room_id')">Sort by room</button>
+                    <button @click="sortData('reservation_start')">Sort by start date</button>
+                    <button @click="sortData('reservation_end')">Sort by end date</button>
+                </div>
             </div>
             <ul>
                 <li v-for="reservation in reservations" :key="reservation.id">
@@ -30,7 +36,14 @@
             </ul>
         </div>
         <div v-else class="right_bubble">
-            <p>Loading...</p>
+            <div class="flex_center" v-if="sevenseconds == false">
+                <p>
+                    You have no reservations yet.
+                </p>  
+            </div>
+            <div class="flex_center" v-else>
+                <p>Loading...</p>
+            </div>
         </div>
     </div>
     <div class="flex_left">
@@ -115,7 +128,7 @@ import formValidation from '@/mixins/validator';
 import router from '@/router';
 import { useReservationStore } from '@/stores/reservationStore';
 import { useUserStore } from '@/stores/userStore';
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 
 export default {
 name: 'Reservations',
@@ -123,6 +136,7 @@ setup() {
     const reservationStore = new useReservationStore();
     const reservations = ref([]);
     const errors = ref(null);
+    const sevenseconds = ref(true);
 
     const createNewForm = ref(false);
     const form = ref({
@@ -249,10 +263,12 @@ setup() {
         await reservationStore.getReservations('');
         currentUser.value = JSON.parse(localStorage.getItem('credentials'));
         updateValues();
-
+        setTimeout(() => {
+            sevenseconds.value = false;
+        }, 7000);
     });
     return {
-        reservations, currentPage, totalPages, 
+        reservations, currentPage, totalPages, sevenseconds,
         nextPageUrl, prevPageUrl, sortBy, 
         direction, currentUser, createNewForm, form,
         error, confirmationReservation, errors,

@@ -15,7 +15,7 @@ export default {
   <div id="home">
     <header class="left_bubble">
       <h1 class="flex_center" id="title">
-        Hotel "VASHA REKLAMA"
+        Hotel "HELLO WORLD"
       </h1>
       <p class="flex_right">
         Welcome to our hotel. We are glad to see you here.
@@ -27,9 +27,9 @@ export default {
     </header>
     <main class="bubble">
       <p class="flex_center">
-        <div id="imagetext">
+        <span id="imagetext">
           I love Laravel. Thank god human invented sanctum.
-        </div>
+        </span>
       </p>
       <div class="flex_center">
         <img class="tarantino" :src="imageUrl" alt="">

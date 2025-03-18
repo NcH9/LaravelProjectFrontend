@@ -1,27 +1,36 @@
 <template>
-    <div class="bubble" id="profile">
-        <p>
-            Your email: {{ user.email }}
-        </p>
-        <p>
-            Your username: {{ user.name }}
-        </p>
-        <p>
+    <div class="profile_bubble" id="profile">
+        <div class="flex_between">
+            <div class="grid1">
+                <span>
+                    Your email: {{ user.email }}
+                </span>
+                <span>
+                    Your username: {{ user.name }}
+                </span>
+            </div>
+            
             <div class="grid1">
                 Your profile picture:
-                <div class="grid1">
+                <div class="grid1" v-if="user.image">
                     <img class="flex_center" :src="imageUrl" alt="No Profile picture">
                 </div>
+                <div class="grid1" v-else>
+                    No profile picture
+                </div>
             </div>
-            <button class="center">change profile picture</button>
-        </p>
-        <p>
+        </div>
+
+        <div class="grid1">
+            <p>
             Your roles: 
             <span v-for="role in user.roles"> {{ role.name + " " }} </span>
-        </p>
-        <p>
-            <button @click="logout">Logout</button>
-        </p>
+            </p>
+            <button class="mg-5">change profile picture</button>
+
+            <button class="mg-5" @click="logout">Logout</button>
+        </div>
+        
     </div>
     
 </template>
@@ -46,7 +55,6 @@ export default {
         }
         onBeforeMount( () => {
             user.value = JSON.parse(localStorage.getItem('credentials'));
-            // console.log(user.value.email);
         })
         onMounted(async () => {
             await loadUser();
@@ -67,5 +75,8 @@ export default {
     border-radius: 15px;
     object-fit: cover;
     margin: 10px;
+}
+.mg-5 {
+    margin: 5px;
 }
 </style>

@@ -12,6 +12,7 @@ import { useUserStore } from '@/stores/userStore';
 
 export default {
     setup() {
+
         const isLoggedIn = ref(false);
         function checkAuth() {
             const token = localStorage.getItem('authToken');
@@ -21,9 +22,12 @@ export default {
                 console.log('No token found');
             }
         }
+
+
         onMounted(async () => {
             checkAuth();
-            await (new useTokenStore()).getUserWithToken();
+            const tokenStore = new useTokenStore();
+            await tokenStore.getUserWithToken();
             const userStore = new useUserStore();
             if (localStorage.getItem('credentials')) {
                 const savedUserId = JSON.parse(localStorage.getItem('credentials')).id;

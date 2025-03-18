@@ -51,7 +51,7 @@
         
     </div>
 
-    <div class="bubble">
+    <div class="bubble" v-show="rooms.length != 0">
         <div class="building">
             <div v-for="(floor, index) in rooms" :key="index" class="floor">
             <h3>Floor {{ index }}</h3>
@@ -60,11 +60,11 @@
                     <div class="flex_center">
                         {{ room.id }}
                     </div>
-                    <div v-if="room.status.id == 2" class="flex_center green">
-                        {{ room.status.name }}
+                    <div v-if="room.calculatedStatus == 'Available'" class="flex_center green">
+                        {{ room.calculatedStatus }}
                     </div>
                     <div v-else class="flex_center red">
-                        {{ room.status.name }}
+                        {{ room.calculatedStatus }}
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@ export default {
         onMounted(async () => {
             await roomStore.getRooms();
             rooms.value = roomStore.state.rooms;
-            console.log(rooms.value[1][0].id);
+            console.log(rooms.value);
         });
         return {
             rooms,

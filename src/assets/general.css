@@ -45,3 +45,16 @@
 .green {
     color: rgba(38, 195, 38, 0.75);
 }
+button {
+    background-color: rgba(225, 225, 225, 0.2);
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+button:hover {
+    background-color: rgba(200, 200, 200, 0.5);
+    transition: 0.3s;
+}

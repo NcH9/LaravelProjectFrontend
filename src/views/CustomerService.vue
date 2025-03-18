@@ -15,7 +15,6 @@ export default {
         async function loadUser() {
             await userStore.getUser(user.value.id);
             user.value = userStore.state.user;
-            console.log(user.value.reservations.length);
         }
         function findIfNowIsReservation() {
             const today = new Date();
@@ -31,8 +30,6 @@ export default {
             });
         }
         async function createOrder() {
-            console.log(user.value.id);
-            console.log(currentReservation.value.room_id);
             const data = {
                 user_id: user.value.id, 
                 room_id: currentReservation.value.room_id
@@ -59,17 +56,24 @@ export default {
                         Authorization: `Bearer ${localStorage.getItem('authToken')}`
                     }
                 });
-                // console.log(response.data);
                 if (response.data) {
+                    document.getElementById('orderbtn').disabled = true;
                     orderOnWay.value = true;
-                }
-                // if (response.data) {
-                //     orderOnWay.value = true;
-                // }
+                    return true;
+                } 
+                
+                return false;
             } catch (error) {
                 console.log(error);
             }
         }
+        async function validateOrder() {
+            if (!await checkOrder()) {
+                await createOrder();
+                await checkOrder();
+            }
+        }
+
         onMounted(async () => {
             await loadUser();
             if (user.value.reservations.length > 0) {
@@ -79,6 +83,7 @@ export default {
                 });
             }
             findIfNowIsReservation();
+            // fix this
             await checkOrder();
             if (user.value.reservations.length < 3) {
                 document.getElementById('wow').style.color = 'red';
@@ -93,7 +98,7 @@ export default {
         });
         return {
             user, wow, spendings, currentReservation, orderOnWay,
-            loadUser, findIfNowIsReservation, createOrder, checkOrder
+            loadUser, findIfNowIsReservation, createOrder, checkOrder, validateOrder
         }
     }
 }
@@ -114,7 +119,7 @@ export default {
 <div class="bubble">
     <div v-if="currentReservation && !orderOnWay">
         <div class="flex_center">
-            <button @click="createOrder">Order something</button>
+            <button @click="validateOrder" id="orderbtn">Order something</button>
         </div>
     </div>
     <div v-else-if="orderOnWay">
