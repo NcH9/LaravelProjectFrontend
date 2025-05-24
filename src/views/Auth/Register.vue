@@ -51,10 +51,9 @@
 </template>
 <script>
 import { reactive, ref } from 'vue';
-import axiosInstance from '@/api/axios';
-import formValidation from '@/mixins/validator';
-import { useTokenStore } from '@/stores/tokenStore';
-import router from '@/router';
+import axiosInstance from '@/api/axios.js';
+import formValidation from '@/mixins/validator.js';
+import router from '@/router/index.js';
 export default {
     setup() {
         const form = ref ({
@@ -65,7 +64,6 @@ export default {
         });
         const errors = ref({});
         const successMessage = ref('');
-        const tokenStore = new useTokenStore();
 
         const { error, validatePassword, validatePasswordConfirmation, validateEmail, resetError, validateUsername } = formValidation();
 
@@ -89,7 +87,6 @@ export default {
                 successMessage.value = "Registration successful!";
 
                 localStorage.setItem("authToken", response.data.token);
-                await tokenStore.getUserWithToken();
 
                 router.push({ name: 'home' }).then(() => {
                     window.location.reload();

@@ -29,10 +29,9 @@
 
 <script>
 import { ref } from 'vue';
-import axiosInstance from '@/api/axios';
-import formValidation from '@/mixins/validator';
-import router from '@/router';
-import { useTokenStore } from '@/stores/tokenStore';
+import axiosInstance from '@/api/axios.js';
+import formValidation from '@/mixins/validator.js';
+import router from '@/router/index.js';
 export default {
     name: 'Login',
     mixins: [formValidation],
@@ -61,10 +60,8 @@ export default {
                 successMessage.value = "";
 
                 const response = await axiosInstance.post("/login", form.value);
-                const tokenStore = useTokenStore();
                 successMessage.value = "Login successful!";
-                localStorage.setItem("authToken", response.data.token);
-                await tokenStore.getUserWithToken();
+                localStorage.setItem('authToken', response.data.token);
 
                 router.push({ name: 'home' }).then(() => {
                     window.location.reload();

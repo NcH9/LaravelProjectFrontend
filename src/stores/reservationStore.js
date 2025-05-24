@@ -8,32 +8,34 @@ export const useReservationStore = defineStore('reservations', () => {
         reservations: [],
         meta: [],
         links: [],
-        sort: [],
         error: ''
     })
-    async function getReservations(query) {
+    async function getReservations(query, fullAdress = '') {
         try {
-            const response = await axiosInstance.get(`/reservations${query}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('authToken')}`
-                }   
-            });
-            state.reservations = response.data.data;
-            state.meta = response.data.meta;
-            state.links = response.data.links;
-            state.sort = response.data.sort;
-        } catch (err) {
+            let response;
+            if (fullAdress !== '') {
+                response = await axiosInstance.get(fullAdress);
+            } else {
+                response = await axiosInstance.get(`/reservations${query}`);
+            }
 
+            const meta = response.data.meta;
+            console.log()
+
+            state.reservations = response.data.data;
+            state.meta.current_page = meta.current_page;
+            state.meta.last_page = meta.last_page;
+            state.meta.per_page = meta.per_page;
+            state.meta.total = meta.total;
+            state.links.prev_page_url = meta.prev_page_url;
+            state.links.next_page_url = meta.next_page_url;
+        } catch (err) {
             state.error = err.message;
         }
     }
     async function getOneReservation(id) {
         try {
-            const response = await axiosInstance.get(`/reservations/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('authToken')}`
-                }
-            });
+            const response = await axiosInstance.get(`/reservations/${id}`);
             state.reservation = response.data;
         } catch (err) {
             state.error = err.message;
@@ -41,14 +43,14 @@ export const useReservationStore = defineStore('reservations', () => {
     }
 
     async function confirmReservation(data) {
+        console.log(localStorage.getItem('authToken'));
+
         try {
-            const response = await axiosInstance.post('/reservations/confirm', data, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('authToken')}`
-                }
-            });
+            const response = await axiosInstance.post('/reservations/confirm', data);
+            console.log(response);
             state.reservation = response.data;
         } catch (err) {
+            console.log(err.response);
             if (err.response.status === 400) {
                 state.error = "Sorry, but the room is already booked for the selected dates. Please choose another room or dates.";
             }
@@ -56,11 +58,7 @@ export const useReservationStore = defineStore('reservations', () => {
     }
     async function createReservation(data) {
         try {
-            const response = await axiosInstance.post('/reservations', data, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('authToken')}`
-                }
-            });
+            const response = await axiosInstance.post('/reservations', data);
             state.reservation = response.data;
         } catch (err) {
             if (err.response.status === 400) {
@@ -71,11 +69,7 @@ export const useReservationStore = defineStore('reservations', () => {
 
     async function confirmReservationUpdate (reservation, data) {
         try {
-            const response = await axiosInstance.post(`/reservations/${reservation}/confirmUpdate`, data, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('authToken')}`
-                }
-            });
+            const response = await axiosInstance.post(`/reservations/${reservation}/confirmUpdate`, data);
             state.reservation = response.data;
         } catch (err) {
             state.error = "Sorry, but the room is already booked for the selected dates. Please choose another room or dates.";
@@ -83,11 +77,7 @@ export const useReservationStore = defineStore('reservations', () => {
     }
     async function updateReservation(reservation, data) {
         try {
-            const response = await axiosInstance.put(`/reservations/${reservation}`, data, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('authToken')}`
-                }
-            });
+            const response = await axiosInstance.put(`/reservations/${reservation}`, data);
             state.reservation = response.data;
         } catch (err) {
             state.error = "Sorry, but the room is already booked for the selected dates. Please choose another room or dates.";
