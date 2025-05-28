@@ -5,39 +5,27 @@
         <RouterLink :to="{name: 'login'}">Login</RouterLink>
     </div>
 </template>
-<script>
+<script setup>
 import { onMounted, ref } from 'vue';
-import { useTokenStore } from '@/stores/tokenStore';
 import { useUserStore } from '@/stores/userStore';
 
-export default {
-    setup() {
-
-        const isLoggedIn = ref(false);
-        function checkAuth() {
-            const token = localStorage.getItem('authToken');
-            if (token) {
-                isLoggedIn.value = true;
-            } else {
-                console.log('No token found');
-            }
-        }
-
-
-        onMounted(async () => {
-            checkAuth();
-            const tokenStore = new useTokenStore();
-            await tokenStore.getUserWithToken();
-            const userStore = new useUserStore();
-            if (localStorage.getItem('credentials')) {
-                const savedUserId = JSON.parse(localStorage.getItem('credentials')).id;
-                await userStore.getUser(savedUserId);
-            }
-        });
-        return {
-            isLoggedIn,
-            checkAuth
-        }
+const isLoggedIn = ref(false);
+function checkAuth() {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+        isLoggedIn.value = true;
+    } else {
+        console.log('No token found');
     }
 }
+
+
+onMounted(async () => {
+    checkAuth();
+    const userStore = new useUserStore();
+    if (localStorage.getItem('credentials')) {
+        const savedUserId = JSON.parse(localStorage.getItem('credentials')).id;
+        await userStore.getUser(savedUserId);
+    }
+});
 </script>

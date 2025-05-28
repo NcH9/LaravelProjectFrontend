@@ -35,7 +35,7 @@
     
 </template>
 <script>
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/stores/userStore.js';
 import { onBeforeMount, onMounted, ref } from 'vue';
 
 export default {

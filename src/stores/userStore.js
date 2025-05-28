@@ -4,6 +4,7 @@ import axiosInstance from '@/api/axios';
 
 export const useUserStore = defineStore('users', () => {
   const state = reactive({
+    message: 'hello1',
     user: [],
     users: [],
     error: ''
