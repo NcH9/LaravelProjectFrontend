@@ -14,8 +14,6 @@ function checkAuth() {
     const token = localStorage.getItem('authToken');
     if (token) {
         isLoggedIn.value = true;
-    } else {
-        console.log('No token found');
     }
 }
 
@@ -29,3 +27,14 @@ onMounted(async () => {
     }
 });
 </script>
+
+<style scoped>
+a {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgba(26, 197, 60, 0.8);
+    border-radius: 25px 25px 0 25px;
+    /* background-color: rgba(0, 128, 0, 0.2); */
+    padding: 10px;
+    margin: 5px;
+}
+</style>

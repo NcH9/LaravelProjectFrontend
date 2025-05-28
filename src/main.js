@@ -6,6 +6,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import Pusher from 'pusher-js'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 
 const app = createApp(App)
 
@@ -25,6 +27,7 @@ channel.bind('report.generated', function(data) {
     }
 });
 app.use(createPinia())
+app.use(ElementPlus)
 app.use(router)
 
 app.mount('#app')

@@ -7,9 +7,9 @@ export const useRoomStore = defineStore('rooms', () => {
         rooms: [],
         error: ''
     })
-    async function getRooms() {
+    async function getRooms(params = {}) {
         try {
-            const response = await axiosInstance.get('/rooms');
+            const response = await axiosInstance.get('/rooms', {params});
             state.rooms = response.data;
         } catch (err) {
             state.error = err.message;

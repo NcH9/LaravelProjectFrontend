@@ -24,7 +24,7 @@ import router from "@/router/index.js";
 
 const props = defineProps({
         reservation: {
-            type: Array,
+            type: Object,
             required: true
         },
         showEmail: {
