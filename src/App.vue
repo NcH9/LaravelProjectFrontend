@@ -16,7 +16,6 @@ import auth from "./components/auth.vue";
           <RouterLink class="flex_center" to="/finances">Finances</RouterLink>
         </nav>
         <nav class="flex_between">
-          <RouterLink class="flex_center" to="/customer_service">Customer Service</RouterLink>
           <auth></auth>
         </nav> 
       </div>
@@ -29,7 +28,7 @@ import auth from "./components/auth.vue";
     
 </template>
 
-<style>
+<style scoped>
 a {
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: rgba(26, 197, 60, 0.8);

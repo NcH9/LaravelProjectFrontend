@@ -1,4 +1,7 @@
 <template>
+    <RoomsPreview
+        v-if="rooms.length !== 0"
+    />
     <div class="right_bubble" id="housekeeping">
         <div class="grid1">
             <div class="flex_center">
@@ -28,21 +31,6 @@
                 <p class="flex_center">
                     Fifth floor: 11:00 - 12:00 on Fridays
                 </p>
-                <p class="flex_center">
-                    Sixth floor: 12:00 - 13:00 on Mondays
-                </p>
-                <p class="flex_center">
-                    Seventh floor: 10:00 - 11:00 on Tuesdays
-                </p>
-                <p class="flex_center">
-                    Eighth floor: 11:00 - 12:00 on Wednesdays
-                </p>
-                <p class="flex_center">
-                    Ninth floor: 12:00 - 13:00 on Thursdays
-                </p>
-                <p class="flex_center">
-                    Tenth floor: 10:00 - 11:00 on Fridays
-                </p>
             </div>
         </div>
         <div>
@@ -51,26 +39,6 @@
         
     </div>
 
-    <div class="bubble" v-show="rooms.length != 0">
-        <div class="building">
-            <div v-for="(floor, index) in rooms" :key="index" class="floor">
-            <h3>Floor {{ index }}</h3>
-            <div class="rooms">
-                <div v-for="(room, roomIndex) in floor" :key="roomIndex" class="room">
-                    <div class="flex_center">
-                        {{ room.id }}
-                    </div>
-                    <div v-if="room.calculatedStatus == 'Available'" class="flex_center green">
-                        {{ room.calculatedStatus }}
-                    </div>
-                    <div v-else class="flex_center red">
-                        {{ room.calculatedStatus }}
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
     <div class="left_bubble">
         <div class="flex_center">
             <p>
@@ -80,25 +48,23 @@
     </div>
 </template>
 
-<script>
-import { useRoomStore } from '@/stores/roomStore';
+<script setup>
+import { useRoomStore } from '@/stores/roomStore.js';
 import { onMounted, ref } from 'vue';
+import RoomsPreview from "@/views/Housekeeping/RoomsPreview.vue";
 
-export default {
-    name: 'Housekeeping',
-    setup() {
-        const roomStore = new useRoomStore();
-        const rooms = ref([]);
-        onMounted(async () => {
-            await roomStore.getRooms();
-            rooms.value = roomStore.state.rooms;
-            console.log(rooms.value);
-        });
-        return {
-            rooms,
-        };
+const roomStore = new useRoomStore();
+const rooms = ref([]);
+
+onMounted(async () => {
+    console.log(roomStore.state.rooms)
+    if (!roomStore.state.rooms || roomStore.state.rooms.length === 0) {
+        await roomStore.getRooms();
     }
-}
+    rooms.value = roomStore.state.rooms;
+    console.log(rooms.value)
+});
+
 </script>
 
 <style scoped>

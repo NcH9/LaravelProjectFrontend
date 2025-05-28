@@ -1,0 +1,83 @@
+<template>
+    <div class="right_bubble" id="finances">
+        <div class="grid1">
+            <h1>Finances</h1>
+            <div>
+                <p>Info about prices, tariffs and discounts</p>
+            </div>
+            <div>
+                <p>Here is how prices work:</p>
+                <ul>
+                    <li>
+                        <p>Every day on <span class="green">floor 1 costs 500 UAH</span> </p>
+                    </li>
+                    <li>
+                        <p>
+                            Each <span class="red">floor</span> is <span class="red">more expensive</span> than last one. 
+                            To be exact: <span class="red">25% more, up to 325%</span> (if you want to book on the last floor)
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            But there is also <span class="green">bonus</span> if you stay in hotel for a long time:
+                            if reservation is <span class="green">14 days or longer</span>, whole price is <span class="green">down for 10%.</span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <FinancesReport v-if="userIsAdmin"></FinancesReport>
+    <div class="left_bubble" id="finances2">
+        <div class="grid1">
+            <p class="flex_right">We dont have money</p>
+            <p class="flex_right">but</p>
+            <p class="flex_right">we have spatie/laravel-permissions and Barryvdh aka PDF</p>
+            <div class="flex_right">
+                <img id="bob" src="http://localhost:8080/storage/bob.png" alt="gangsta bob">
+            </div>
+        </div>
+    </div>
+</template>
+<script setup>
+import { useUserStore } from '@/stores/userStore.js';
+import { inject, onMounted, ref } from 'vue';
+import {useRoute} from "vue-router";
+import FinancesReport from "@/views/Finances/FinancesReport.vue";
+
+const
+    userIsAdmin = ref(false),
+    userStore = new useUserStore();
+const route = useRoute();
+
+
+onMounted(async () => {
+    await userStore.getUser(route.meta.uid);
+    console.log(userStore.state.user)
+    userStore.state.user.roles.forEach(role => {
+        if (role.name === 'admin') {
+            userIsAdmin.value = true;
+            console.log(userIsAdmin.value)
+        }
+    })
+});
+</script>
+
+<style>
+#finances {
+    display: flex;
+    justify-content: flex-start;
+    padding: 50px;
+}
+#finances2 {
+    display: flex;
+    justify-content: flex-end;
+    padding: 50px;
+}
+#bob {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+</style>

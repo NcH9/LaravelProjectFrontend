@@ -1,5 +1,5 @@
 <template>
-    <div class="flex_right">
+<!--    <div class="flex_right">-->
         <div v-if="!isLoading" class="right_bubble">
             <div v-if="reservations.length !== 0">
                 <div class="grid1" v-if="reservations.length >= 10">
@@ -37,7 +37,7 @@
                 <p>Loading...</p>
             </div>
         </div>
-    </div>
+<!--    </div>-->
 </template>
 
 <script setup>

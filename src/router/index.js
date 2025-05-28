@@ -16,22 +16,17 @@ const router = createRouter({
             component: () => import('../views/AboutView.vue'),
         },
         {
-            path: '/customer_service',
-            name: 'customer-service',
-            component: () => import('../views/CustomerService.vue'),
+            path: '/finances',
+            name: 'finances',
+            component: () => import('../views/Finances/Finances.vue'),
             meta: {
                 requiresAuth: true,
             }
         },
         {
-            path: '/finances',
-            name: 'finances',
-            component: () => import('../views/Finances.vue'),
-        },
-        {
             path: '/housekeeping',
             name: 'housekeeping',
-            component: () => import('../views/Housekeeping.vue'),
+            component: () => import('../views/Housekeeping/Housekeeping.vue'),
         },
         {
             path: '/reservations',

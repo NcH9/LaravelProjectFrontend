@@ -25,5 +25,9 @@ export const useUserStore = defineStore('users', () => {
       state.error = err.message;
     }
   }
+
+  async function getUserDiscounts(id) {
+
+  }
   return { state, getUsers, getUser };
 })
