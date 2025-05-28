@@ -42,30 +42,26 @@ export const useReservationStore = defineStore('reservations', () => {
         }
     }
 
-    async function confirmReservation(data) {
-        console.log(localStorage.getItem('authToken'));
-
-        try {
-            const response = await axiosInstance.post('/reservations/confirm', data);
-            console.log(response);
-            state.reservation = response.data;
-        } catch (err) {
-            console.log(err.response);
-            if (err.response.status === 400) {
-                state.error = "Sorry, but the room is already booked for the selected dates. Please choose another room or dates.";
-            }
-        }
-    }
-    async function createReservation(data) {
-        try {
-            const response = await axiosInstance.post('/reservations', data);
-            state.reservation = response.data;
-        } catch (err) {
-            if (err.response.status === 400) {
-                state.error = "Sorry, but the room is already booked for the selected dates. Please choose another room or dates.";
-            }
-        }
-    }
+    // async function confirmReservation(data) {
+    //     try {
+    //         const response = await axiosInstance.post('/reservations/confirm', data);
+    //         state.reservation = response.data;
+    //     } catch (err) {
+    //         if (err.response.status === 400) {
+    //             state.error = "Sorry, but the room is already booked for the selected dates. Please choose another room or dates.";
+    //         }
+    //     }
+    // }
+    // async function createReservation(data) {
+    //     try {
+    //         const response = await axiosInstance.post('/reservations', data);
+    //         state.reservation = response.data;
+    //     } catch (err) {
+    //         if (err.response.status === 400) {
+    //             state.error = "Sorry, but the room is already booked for the selected dates. Please choose another room or dates.";
+    //         }
+    //     }
+    // }
 
     async function confirmReservationUpdate (reservation, data) {
         try {
@@ -86,7 +82,7 @@ export const useReservationStore = defineStore('reservations', () => {
 
     return { 
         state, 
-        getReservations, getOneReservation, createReservation,
-        confirmReservation, confirmReservationUpdate, updateReservation
+        getReservations, getOneReservation,
+        confirmReservationUpdate, updateReservation
     };
 })

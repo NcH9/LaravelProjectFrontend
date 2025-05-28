@@ -92,6 +92,7 @@ export default {
                     window.location.reload();
                 });
             } catch (error) {
+                console.log(error);
                 if (error.response && error.response.status === 422) {
                     errors.value = error.response.data.errors;
                 } else {
