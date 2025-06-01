@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import {useRoomStore} from "@/stores/roomStore.js";
 
 export default function formValidation() {
     const error = ref({
@@ -56,17 +57,29 @@ export default function formValidation() {
         }
     }
 
-    function validateRoom(room) {
-        if (room === '') {
+    async function validateRoom(roomNumber) {
+        const roomStore = useRoomStore();
+
+        if (roomStore.state.rooms.length === 0) {
+            await roomStore.getRooms();
+        }
+        // console.log(roomStore.state.rooms)
+        // return;
+        const exists = Object.values(roomStore.state.rooms).some(floor =>
+            floor.some(room => room.number === roomNumber)
+        )
+
+        if (!exists) {
+            error.value.room = 'This room does not exist.';
+            return;
+        }
+
+        if (roomNumber === '') {
             error.value.room = 'Room is required.';
             return;
         }
 
-        if (room < 0 || room > 50) {
-            error.value.room = 'This room does not exist.';
-        } else {
-            error.value.room = '';
-        }
+        error.value.room = '';
     }
     function validateStart(startDate) {
         if (startDate === '') {

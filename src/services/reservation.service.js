@@ -1,11 +1,19 @@
 import axiosInstance from "@/api/axios.js";
 
 export const reservationService = {
-    async createReservation(data) {
+    async checkIfPossibleToReserve(data) {
         return await axiosInstance.post('/reservations/confirm', data);
     },
 
-    async confirmCreation(data) {
+    async createReservation(data) {
         return await axiosInstance.post('/reservations', data);
+    },
+
+    async checkIfPossibleToUpdate(reservation, data) {
+        return await axiosInstance.post(`/reservations/${reservation}/confirmUpdate`, data);
+    },
+
+    async updateReservation(reservation, data) {
+        return await axiosInstance.put(`/reservations/${reservation}`, data);
     }
 }
