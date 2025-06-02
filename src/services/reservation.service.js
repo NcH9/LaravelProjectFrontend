@@ -15,5 +15,9 @@ export const reservationService = {
 
     async updateReservation(reservation, data) {
         return await axiosInstance.put(`/reservations/${reservation}`, data);
-    }
+    },
+
+    async processPayment(reservation, data) {
+        return await axiosInstance.post(`/orders/${reservation}/process-payment`, data);
+    },
 }

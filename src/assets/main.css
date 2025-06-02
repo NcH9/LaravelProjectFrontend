@@ -8,17 +8,21 @@
   font-size: large;
 }
 
+:root {
+  --el-color-primary: #67C23A; /* зелёный (Element Plus стандартный success) */
+}
+
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: hsl(133, 100%, 37%);
   transition: 0.4s;
   padding: 3px;
 }
 
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    background-color: hsla(121, 100%, 37%, 0.2);
   }
 }
 

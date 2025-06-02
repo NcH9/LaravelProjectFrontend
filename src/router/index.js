@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import axiosInstance from "../api/axios.js";
+import {useUserStore} from "@/stores/userStore.js";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,7 +58,7 @@ const router = createRouter({
         {
             path: '/reservation/:id',
             name: 'single-reservation',
-            component: () => import('../views/Reservations/ReservationEdit.vue'),
+            component: () => import('../views/Reservations/ReservationPage.vue'),
             meta: {
                 requiresAuth: true,
             }
@@ -66,6 +67,14 @@ const router = createRouter({
             path: '/reservations/create',
             name: 'create-reservation',
             component: () => import('../views/Reservations/ReservationCreate.vue'),
+            meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: '/finances/discounts',
+            name: 'DiscountPage',
+            component: () => import('../views/Finances/Discounts/DiscountPage.vue'),
             meta: {
                 requiresAuth: true,
             }
@@ -84,7 +93,7 @@ router.beforeEach(async (to, from, next) => {
                 to.meta.uid = response.data.id;
                 return next();
             }
-            // to.meta.uid = 4;
+
             return next();
         } catch (error) {
             console.log(error)
@@ -95,7 +104,6 @@ router.beforeEach(async (to, from, next) => {
             }
         }
     }
-
 
     if ((to.name === "login" || to.name === "register") && token) {
         next({ name: 'profile' });
