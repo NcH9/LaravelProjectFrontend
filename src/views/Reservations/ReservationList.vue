@@ -1,43 +1,41 @@
 <template>
-<!--    <div class="flex_right">-->
-        <div v-if="!isLoading" class="right_bubble">
-            <div v-if="reservations.length !== 0">
-                <div class="grid1" v-if="reservations.length >= 10">
+    <div v-if="!isLoading" class="right_bubble">
+        <div v-if="reservations.length !== 0">
+            <div class="grid1" v-if="reservations.length >= 10">
+                <div class="flex_center">
                     <div class="flex_center">
-                        <div class="flex_center">
-                            <button @click="prevPage" :disabled="!prevPageUrl">Previous</button>
-                        </div>
-                        <span>Page {{ currentPage }} of {{ totalPages }}</span>
-                        <div class="flex_center">
-                            <button @click="nextPage" :disabled="!nextPageUrl">Next</button>
-                        </div>
-                        </div>
-                        <div class="flex_center">
-                            <button @click="sortData('room_id')">Sort by room</button>
-                            <button @click="sortData('reservation_start')">Sort by start date</button>
-                            <button @click="sortData('reservation_end')">Sort by end date</button>
-                        </div>
+                        <button @click="prevPage" :disabled="!prevPageUrl">Previous</button>
                     </div>
-                    <div v-for="reservation in reservations" :key="reservation.id">
-                        <ReservationItem
-                            :reservation="reservation"
-                            :show-email="reservation.user.id !== currentUserId"
-                        />
+                    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+                    <div class="flex_center">
+                        <button @click="nextPage" :disabled="!nextPageUrl">Next</button>
+                    </div>
+                    </div>
+                    <div class="flex_center">
+                        <button @click="sortData('room_id')">Sort by room</button>
+                        <button @click="sortData('reservation_start')">Sort by start date</button>
+                        <button @click="sortData('reservation_end')">Sort by end date</button>
                     </div>
                 </div>
-                <div class="flex_center" v-else>
-                <p>
-                    You have no reservations yet.
-                </p>
+                <div v-for="reservation in reservations" :key="reservation.id">
+                    <ReservationItem
+                        :reservation="reservation"
+                        :show-email="reservation.user.id !== currentUserId"
+                    />
+                </div>
             </div>
+            <div class="flex_center" v-else>
+            <p>
+                You have no reservations yet.
+            </p>
         </div>
+    </div>
 
-        <div v-else class="right_bubble">
-            <div class="flex_center">
-                <p>Loading...</p>
-            </div>
+    <div v-else class="right_bubble">
+        <div class="flex_center">
+            <p>Loading...</p>
         </div>
-<!--    </div>-->
+    </div>
 </template>
 
 <script setup>
@@ -64,7 +62,7 @@ async function prevPage() {
             await reservationStore.getReservations('', prevPageUrl.value);
             updateValues();
         } catch (error) {
-
+            console.log(error)
         } finally {
             isLoading.value = false;
         }
@@ -78,7 +76,7 @@ async function nextPage() {
             await reservationStore.getReservations('', nextPageUrl.value);
             updateValues();
         } catch (error) {
-
+            console.log(error)
         } finally {
             isLoading.value = false;
         }
@@ -97,9 +95,14 @@ function updateValues() {
 }
 onMounted(async () => {
     isLoading.value = true;
-    await reservationStore.getReservations('');
-    isLoading.value = false;
-    updateValues();
+    try {
+        await reservationStore.getReservations('');
+        updateValues();
+    } catch (error) {
+        console.log(error)
+    } finally {
+        isLoading.value = false;
+    }
 });
 </script>
 

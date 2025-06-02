@@ -16,37 +16,46 @@
                     {{ reservation.user.email }}
                 </span>
             </span>
-            <span v-if="!reservation?.order?.isPaid">
-                ,
-                <span style="color: red;">
-                    not paid
-                </span>
+            <span
+                v-if="!reservation?.order?.is_paid"
+                style="color: red;"
+            >
+                not paid
+            </span>
+            <span
+                v-else
+                style="color: green"
+            >
+                paid
             </span>
         </p>
     </div>
 
     <div v-if="advanced">
-        <div class="grid1">
-            <div class="flex_center">
+        <div class="reservation-summary-card">
+            <div class="reservation-row">
                 <p>
-                    Room <span :style="{color: 'red'}">{{ reservation.room.number }} </span>,
+                    Room <span class="highlight">{{ reservation.room.number }}</span>
                 </p>
             </div>
-            <div class="flex_center">
+
+            <div class="reservation-row">
                 <p>
                     Reserved for {{ totalDays }} days,
                     ({{ formattedStart(reservation.reservation_start) }} - {{ formattedEnd(reservation.reservation_end) }})
                 </p>
             </div>
-            <div class="flex_center" v-if="reservation.price !== 0">
+
+            <div class="reservation-row" v-if="reservation.price !== 0">
                 <p>
-                    Price: {{ reservation.price }} UAH
+                    Price: <span class="highlight">{{ reservation.price }}</span> UAH
                 </p>
             </div>
-            <div class="flex_center">
+
+            <div class="reservation-row">
                 <p>
-                    <span class="user" v-if="reservation.user_id !== route.meta.uid">
-                        By {{ reservation.user.email }}
+                    <span class="user-note" v-if="reservation.user_id !== route.meta.uid">
+                      By {{ reservation.user.email }}
                     </span>
                 </p>
             </div>
@@ -96,5 +105,30 @@ function goToReservation(id) {
 </script>
 
 <style scoped>
+.reservation-summary-card {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 1px solid #dde6dc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-top: 1rem;
+}
 
+.reservation-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.highlight {
+    color: #67C23A;
+    font-weight: 600;
+}
+
+.user-note {
+    font-style: italic;
+    color: #919990;
+}
 </style>

@@ -1,4 +1,13 @@
 <template>
+    <FinancesReport v-if="isUserAdmin"></FinancesReport>
+    <RouterLink
+        v-if="isUserAdmin"
+        class="discount_link"
+        :to="{ name: 'DiscountPage' }"
+    >
+        Discounts
+    </RouterLink>
+
     <div class="right_bubble" id="finances">
         <div class="grid1">
             <h1>Finances</h1>
@@ -28,7 +37,6 @@
         </div>
     </div>
 
-    <FinancesReport v-if="userIsAdmin"></FinancesReport>
     <div class="left_bubble" id="finances2">
         <div class="grid1">
             <p class="flex_right">We dont have money</p>
@@ -42,25 +50,23 @@
 </template>
 <script setup>
 import { useUserStore } from '@/stores/userStore.js';
-import { inject, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import {useRoute} from "vue-router";
 import FinancesReport from "@/views/Finances/FinancesReport.vue";
 
 const
-    userIsAdmin = ref(false),
-    userStore = new useUserStore();
+    isUserAdmin = ref(false),
+    userStore = new useUserStore(),
+    activeTab = ref('reports');
 const route = useRoute();
 
-
 onMounted(async () => {
-    await userStore.getUser(route.meta.uid);
-    console.log(userStore.state.user)
-    userStore.state.user.roles.forEach(role => {
-        if (role.name === 'admin') {
-            userIsAdmin.value = true;
-            console.log(userIsAdmin.value)
-        }
-    })
+    try {
+        await userStore.getUser(route.meta.uid);
+        isUserAdmin.value = userStore.state.user.roles.some(role => role.name === 'admin');
+    } catch (error) {
+        console.log(error)
+    }
 });
 </script>
 
@@ -79,5 +85,16 @@ onMounted(async () => {
     width: 300px;
     height: 300px;
     object-fit: cover;
+}
+
+.discount_link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgba(26, 197, 60, 0.8);
+    border-radius: 25px;
+    padding: 10px;
+    margin: 5px;
 }
 </style>

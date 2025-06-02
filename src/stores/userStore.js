@@ -4,9 +4,9 @@ import axiosInstance from '@/api/axios';
 
 export const useUserStore = defineStore('users', () => {
   const state = reactive({
-    message: 'hello1',
-    user: [],
-    users: [],
+    user: null,
+    userDiscounts: null,
+    users: null,
     error: ''
   })
   async function getUsers() {
@@ -26,8 +26,5 @@ export const useUserStore = defineStore('users', () => {
     }
   }
 
-  async function getUserDiscounts(id) {
-
-  }
   return { state, getUsers, getUser };
 })

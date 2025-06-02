@@ -8,6 +8,7 @@ import router from './router'
 import Pusher from 'pusher-js'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import '@/assets/element-override.css'
 
 const app = createApp(App)
 

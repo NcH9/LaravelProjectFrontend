@@ -1,26 +1,26 @@
 
 <template>
     <div class="bubble">
-        <form
-            @submit.prevent="validateForm"
-            id="pdf_report_form"
-        >
-            <div class="grid1">
-                <input type="date"
-                       name="reservation_start"
-                       v-model="form.start_date"
-                >
-            </div>
-            <div class="grid1">
-                <input type="date" name="reservation_end"
-                       v-model="form.end_date"
-                >
-            </div>
-            <span class="error" v-if="error.length > 0">something`s wrong i can feel it...</span>
-            <button type="submit">Generate</button>
-            <div class="flex_center">
-            </div>
-        </form>
+        <div class="flex_center">
+            <el-form>
+                <el-form-item>
+                    <el-date-picker
+                        type="date"
+                        v-model="form.start_date"
+                    />
+                </el-form-item>
+                <el-form-item>
+                    <el-date-picker
+                        type="date"
+                        v-model="form.end_date"
+                    />
+                </el-form-item>
+                <span class="error" v-if="error.length > 0">something`s wrong i can feel it...</span>
+                <el-form-item>
+                    <el-button @click="validateForm">Generate Report</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
     </div>
 </template>
 <script setup>
