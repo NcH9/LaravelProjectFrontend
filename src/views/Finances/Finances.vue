@@ -1,6 +1,5 @@
 <template>
     <div v-if="!isLoading">
-    <!--    <FinancesReport v-if="isUserAdmin"></FinancesReport>-->
         <RouterLink
             v-if="isUserAdmin"
             class="discount_link"
@@ -66,10 +65,8 @@
 import { useUserStore } from '@/stores/userStore.js';
 import { onMounted, ref } from 'vue';
 import {useRoute} from "vue-router";
-import FinancesReport from "@/views/Finances/FinancesReport.vue";
 import Loading from "@/components/Loading.vue";
 import DiscountList from "@/views/Finances/Discounts/DiscountList.vue";
-import DiscountForm from "@/views/Finances/Discounts/DiscountForm.vue";
 import {useRoomStore} from "@/stores/roomStore.js";
 
 const
