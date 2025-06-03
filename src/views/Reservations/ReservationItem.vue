@@ -5,13 +5,13 @@
         @click="goToReservation(reservation.id)"
     >
         <p>
-            Room
+            {{$t('reservations.item.room')}}
             <span style="color: red;">
                 {{ reservation.room.number }}
             </span>,
             {{ formattedStart(reservation.reservation_start) }} - {{ formattedEnd(reservation.reservation_end)}}
             <span v-if="showEmail">
-                , By
+                , {{$t('reservations.item.by')}}
                 <span class="user">
                     {{ reservation.user.email }}
                 </span>
@@ -20,13 +20,13 @@
                 v-if="!reservation?.order?.is_paid"
                 style="color: red;"
             >
-                not paid
+                {{$t('reservations.item.not_paid')}}
             </span>
             <span
                 v-else
                 style="color: green"
             >
-                paid
+                {{$t('reservations.item.paid')}}
             </span>
         </p>
     </div>
@@ -35,28 +35,32 @@
         <div class="reservation-summary-card">
             <div class="reservation-row">
                 <p>
-                    Room <span class="highlight">{{ reservation.room.number }}</span>
+                    {{$t('reservations.item.room')}} <span class="highlight">{{ reservation.room.number }}</span>
                 </p>
             </div>
 
             <div class="reservation-row">
                 <p>
-                    Reserved for {{ totalDays }} days,
+                    {{$t('reservations.item.reserved_for')}} {{ totalDays }},
                     ({{ formattedStart(reservation.reservation_start) }} - {{ formattedEnd(reservation.reservation_end) }})
                 </p>
             </div>
 
             <div class="reservation-row" v-if="reservation.price !== 0">
                 <p>
-                    Price: <span class="highlight">{{ reservation.price }}</span> UAH
+                    {{$t('reservations.item.price')}}: <span class="highlight">{{ reservation.price }}</span>{{$t('reservations.item.uah')}}
                 </p>
             </div>
 
-            <div class="reservation-row">
+            <div class="reservation-row" v-if="reservation.price !== 0">
                 <p>
-                    <span class="user-note" v-if="reservation.user_id !== route.meta.uid">
-                      By {{ reservation.user.email }}
-                    </span>
+                    {{$t('reservations.item.price_with_discounts')}}: <span class="highlight">{{ reservation.order.price }}</span>{{$t('reservations.item.uah')}}
+                </p>
+            </div>
+
+            <div class="reservation-row" v-if="reservation.user_id !== route.meta.uid">
+                <p class="user-note">
+                    {{$t('reservations.item.by')}} {{ reservation.user.email }}
                 </p>
             </div>
         </div>
@@ -105,6 +109,22 @@ function goToReservation(id) {
 </script>
 
 <style scoped>
+.reservation_bubble {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.75), rgba(200, 200, 200, 0.1));
+    border-radius: 25px 0px 0 25px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Courier New', Courier, monospace;
+}
+.reservation_bubble:hover {
+    cursor: pointer;
+    background-color: rgba(214, 233, 215, 0.75);
+    border-radius: 25px 0 0 25px;
+    transition: 0.5s;
+}
 .reservation-summary-card {
     display: grid;
     gap: 1rem;

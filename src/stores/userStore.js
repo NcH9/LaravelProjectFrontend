@@ -6,6 +6,8 @@ export const useUserStore = defineStore('users', () => {
   const state = reactive({
     user: null,
     userDiscounts: null,
+    seasonalDiscounts: null,
+    allActiveDiscounts: null,
     users: null,
     error: ''
   })
@@ -20,7 +22,9 @@ export const useUserStore = defineStore('users', () => {
   async function getUser(id) {
     try {
       const response = await axiosInstance.get(`/users/${id}`);
-      state.user = response.data;
+      state.user = response.data.user;
+      state.seasonalDiscounts = response.data.seasonal_discounts;
+      state.allActiveDiscounts = response.data.all_active_discounts;
     } catch (err) {
       state.error = err.message;
     }

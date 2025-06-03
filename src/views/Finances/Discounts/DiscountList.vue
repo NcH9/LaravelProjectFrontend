@@ -1,6 +1,6 @@
 <template>
     <div v-if="!discounts">
-        <span>You have no discounts, but they are to come!</span>
+        <span>{{ $t('finances.discounts.no_discounts') }}</span>
     </div>
 
     <div

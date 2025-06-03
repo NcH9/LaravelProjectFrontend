@@ -1,0 +1,132 @@
+{
+  "home": {
+    "title": "Home",
+    "hotel": "Hotel",
+    "welcome_text": "Welcome to our hotel. We are glad to see you here.",
+    "you_can_do_text": "You can book a room, see your reservations and much more."
+  },
+  "reservations": {
+    "title": "Reservations",
+    "reserve_link": "Reserve Room",
+    "no_reservations": "You have no reservations yet",
+    "item": {
+      "room": "Room",
+      "by": "by",
+      "paid": "Paid",
+      "not_paid": "Not Paid",
+      "reserved_for": "Reserved For Days",
+      "price": "Price",
+      "price_with_discounts": "Price With Discounts Applied",
+      "uah": "UAH"
+    },
+    "form": {
+      "start_date": "Reservation Start",
+      "end_date": "Reservation End",
+      "price": "Price",
+      "advanced": {
+        "hide": "Hide Advanced Settings",
+        "show": "Show Advanced Settings",
+        "auto_assign": "Auto Assign Room",
+        "room_number": "Room Number"
+      },
+      "check_availability": "Check Availability",
+      "available": "This Room Fits Your Requests:",
+      "room": "Room",
+      "floor": "Floor",
+      "days": "Days",
+      "days_amount": "day(s)",
+      "uah": "UAH",
+      "discounts_message": "(Price can be lowered in payment process if you have discounts on your account)",
+      "update": "Update",
+      "create": "Create",
+      "change": "Change"
+    },
+    "discounts": {
+      "title": "Discounts for this order",
+      "empty": "No discounts applied."
+    },
+    "tabs": {
+      "your_reservations": "Your Reservations",
+      "edit": "Edit",
+      "discounts": "Discounts",
+      "payment": "Payment",
+      "is_paid": "Paid!",
+      "pay": "Pay"
+    }
+  },
+  "housekeeping": {
+    "title": "Housekeeping",
+    "floor": "Floor"
+  },
+  "finances": {
+    "title": "Finances",
+    "info_label": "Info about prices, tariffs and discounts",
+    "room_prices": "Room Prices",
+    "per_day": "per day",
+    "per_week": "per week",
+    "uah": "UAH",
+    "discounts": {
+      "title": "Discount",
+      "page_link": "Discounts",
+      "labels": {
+        "your_discounts": "Your Discounts",
+        "all_discounts": "All Discounts",
+        "active_discounts": "Active Discounts",
+        "seasonal_discounts": "Seasonal Discounts",
+        "create_discount": "Create Discount",
+        "update_discount": "Edit Discount"
+      },
+      "form": {
+        "name": "Name",
+        "percent": "Percentage",
+        "is_seasonal": "Is Seasonal",
+        "loyalty_reward": "Loyalty Reward",
+        "is_active": "Active",
+        "save": "Save"
+      },
+      "no_discounts": "You have no discounts yet, but they are coming soon!"
+    }
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Sign Out",
+    "profile": "Profile",
+    "your_account_label": "Your Account",
+    "info": "Your Account Info",
+    "email": "Email",
+    "username": "Username",
+    "roles": {
+      "label": "Roles",
+      "admin": "Admin",
+      "user": "User"
+    }
+  },
+  "about": {
+    "title": "About"
+  },
+  "sort": {
+    "page": "Page",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "errors": {
+    "email": "Please enter a valid email address.",
+    "username": "Username must be at least 5 characters long.",
+    "password": "Password must be at least 8 characters long.",
+    "password_confirmation": "Passwords do not match.",
+    "room": {
+      "not_exist": "This room does not exist.",
+      "required": "Room is required."
+    },
+    "start_date": {
+      "required": "Start date is required.",
+      "today_or_later": "Start date must be today or later."
+    },
+    "end_date": {
+      "required": "Date is required.",
+      "later_than_start": "End date must go after start date."
+    }
+  },
+  "loading": "Loading..."
+}

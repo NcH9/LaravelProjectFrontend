@@ -1,21 +1,24 @@
 
 <template>
-    <el-tabs v-model="activeTab">
-        <el-tab-pane label="Your Discounts" name="userDiscounts">
+    <el-tabs v-if="!isLoading" v-model="activeTab">
+        <el-tab-pane :label="$t('finances.discounts.labels.your_discounts')" name="userDiscounts">
             <DiscountList
-                :discounts="userStore.state.userDiscounts"
+                :discounts="userStore.state.user.discounts"
             />
         </el-tab-pane>
-        <el-tab-pane v-if="isUserAdmin" label="All Discounts" name="allDiscounts">
+        <el-tab-pane v-if="isUserAdmin" :label="$t('finances.discounts.labels.all_discounts')" name="allDiscounts">
             <DiscountList
                 :discounts="allDiscounts"
                 :isAdmin="isUserAdmin"
             />
         </el-tab-pane>
-        <el-tab-pane v-if="isUserAdmin" label="Create New Discount" name="createDiscount">
+        <el-tab-pane v-if="isUserAdmin" :label="$t('finances.discounts.labels.create_discount')" name="createDiscount">
             <DiscountForm />
         </el-tab-pane>
     </el-tabs>
+    <div v-else class="bubble">
+        <Loading/>
+    </div>
 </template>
 
 <script setup>
@@ -25,6 +28,7 @@ import {useRoute} from "vue-router";
 import DiscountForm from "@/views/Finances/Discounts/DiscountForm.vue";
 import DiscountList from "@/views/Finances/Discounts/DiscountList.vue";
 import {discountService} from "@/services/discount.service.js";
+import Loading from "@/components/Loading.vue";
 
 const
     userStore = useUserStore(),
@@ -33,10 +37,12 @@ const
 const
     isUserAdmin = ref(false),
     allDiscounts = ref(null),
-    activeTab = ref('userDiscounts');
+    activeTab = ref('userDiscounts'),
+    isLoading = ref(true);
 
 onMounted(async ()=>{
     try {
+        isLoading.value = true;
         if (!userStore.state.user) {
             await userStore.getUser(route.meta.uid);
         }
@@ -49,6 +55,8 @@ onMounted(async ()=>{
         }
     } catch (error) {
         console.log(error)
+    } finally {
+        isLoading.value = false;
     }
 });
 </script>

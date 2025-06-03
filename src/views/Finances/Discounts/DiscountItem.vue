@@ -1,13 +1,13 @@
 
 <template>
     <el-tabs v-if="isAdmin === true" v-model="activeTab" style="width: 100%">
-        <el-tab-pane label="Discount" name="discount">
+        <el-tab-pane :label="$t('finances.discounts.title')" name="discount">
             <div class="flex_between">
                 <span class="discount-name">{{ discount.name }}</span>
                 <span class="discount-percent">{{ Number(discount.percent) }}%</span>
             </div>
         </el-tab-pane>
-        <el-tab-pane label="Update Discount" name="updateDiscount">
+        <el-tab-pane :label="$t('finances.discounts.labels.update_discount')" name="updateDiscount">
             <DiscountForm :discount="discount"/>
         </el-tab-pane>
     </el-tabs>
