@@ -4,7 +4,7 @@ import axiosInstance from '@/api/axios';
 
 export const useRoomStore = defineStore('rooms', () => {
     const state = reactive({
-        rooms: [],
+        rooms: null,
         error: ''
     })
     async function getRooms(params = {}) {

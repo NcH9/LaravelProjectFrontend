@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{name: 'create-reservation'}">Reserve Room</router-link>
+    <router-link :to="{name: 'create-reservation'}">{{$t('reservations.reserve_link')}}</router-link>
     <div class="grid2">
         <div class="left_bubble">
             <div class="flex_center">

@@ -16,6 +16,7 @@
     "pinia": "^2.2.6",
     "pusher-js": "^8.4.0-rc2",
     "vue": "^3.5.12",
+    "vue-i18n": "^11.1.5",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {

@@ -2,50 +2,50 @@
     <RoomsPreview
         v-if="rooms.length !== 0"
     />
-    <div class="right_bubble" id="housekeeping">
-        <div class="grid1">
-            <div class="flex_center">
-                <h1>Housekeeping</h1>
-            </div>
-            <div class="flex_center">
-                <p>
-                    Here you can see the list of rooms and cleaning time.
-                </p>
-            </div>
-            <div class="grid1">
-                <p class="flex_center">
-                    Clearing time:
-                </p>
-                <p class="flex_center">
-                    First floor: 10:00 - 11:00 on Mondays
-                </p>
-                <p class="flex_center">
-                    Second floor: 11:00 - 12:00 on Tuesdays
-                </p>
-                <p class="flex_center">
-                    Third floor: 12:00 - 13:00 on Wednesdays
-                </p>
-                <p class="flex_center">
-                    Fourth floor: 10:00 - 11:00 on Thursdays
-                </p>
-                <p class="flex_center">
-                    Fifth floor: 11:00 - 12:00 on Fridays
-                </p>
-            </div>
-        </div>
-        <div>
-            <img src="http://localhost:8080/storage/neuspel.png" alt="">
-        </div>
-        
-    </div>
+<!--    <div class="right_bubble" id="housekeeping">-->
+<!--        <div class="grid1">-->
+<!--            <div class="flex_center">-->
+<!--                <h1>Housekeeping</h1>-->
+<!--            </div>-->
+<!--            <div class="flex_center">-->
+<!--                <p>-->
+<!--                    Here you can see the list of rooms and cleaning time.-->
+<!--                </p>-->
+<!--            </div>-->
+<!--            <div class="grid1">-->
+<!--                <p class="flex_center">-->
+<!--                    Clearing time:-->
+<!--                </p>-->
+<!--                <p class="flex_center">-->
+<!--                    First floor: 10:00 - 11:00 on Mondays-->
+<!--                </p>-->
+<!--                <p class="flex_center">-->
+<!--                    Second floor: 11:00 - 12:00 on Tuesdays-->
+<!--                </p>-->
+<!--                <p class="flex_center">-->
+<!--                    Third floor: 12:00 - 13:00 on Wednesdays-->
+<!--                </p>-->
+<!--                <p class="flex_center">-->
+<!--                    Fourth floor: 10:00 - 11:00 on Thursdays-->
+<!--                </p>-->
+<!--                <p class="flex_center">-->
+<!--                    Fifth floor: 11:00 - 12:00 on Fridays-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <img src="http://localhost:8080/storage/neuspel.png" alt="">-->
+<!--        </div>-->
+<!--        -->
+<!--    </div>-->
 
-    <div class="left_bubble">
-        <div class="flex_center">
-            <p>
-                Inventory: Ycbl u xboct - Bot nawu dokymentbI (uHBeHTapb)
-            </p>
-        </div>
-    </div>
+<!--    <div class="left_bubble">-->
+<!--        <div class="flex_center">-->
+<!--            <p>-->
+<!--                Inventory: Ycbl u xboct - Bot nawu dokymentbI (uHBeHTapb)-->
+<!--            </p>-->
+<!--        </div>-->
+<!--    </div>-->
 </template>
 
 <script setup>

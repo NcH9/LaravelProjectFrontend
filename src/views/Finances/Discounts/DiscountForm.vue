@@ -1,26 +1,31 @@
 <template>
     <el-form>
-        <el-form-item label="Name">
+        <el-form-item :label="$t('finances.discounts.form.name')">
             <el-input
                 type="text"
                 v-model="form.name"
             />
         </el-form-item>
-        <el-form-item label="Percent">
+        <el-form-item :label="$t('finances.discounts.form.percent')">
             <el-input-number
                 v-model="form.percent"
                 :min="0"
                 :max="100"
             />
         </el-form-item>
-        <el-form-item label="Seasonal">
+        <el-form-item :label="$t('finances.discounts.form.is_seasonal')">
             <el-checkbox
                 v-model="form.is_seasonal"
             />
         </el-form-item>
-        <el-form-item label="Loyalty Reward">
+        <el-form-item :label="$t('finances.discounts.form.loyalty_reward')">
             <el-checkbox
                 v-model="form.loyalty_reward"
+            />
+        </el-form-item>
+        <el-form-item :label="$t('finances.discounts.form.is_active')">
+            <el-checkbox
+                v-model="form.is_active"
             />
         </el-form-item>
         <el-form-item>
@@ -28,7 +33,7 @@
                 @click="saveDiscount"
                 :disabled="isSaving"
             >
-                Save
+                {{ $t('finances.discounts.form.save') }}
             </el-button>
         </el-form-item>
     </el-form>
@@ -50,7 +55,8 @@ const form = ref({
     name: props.discount?.name ?? '',
     percent: Number(props.discount?.percent ?? 0),
     is_seasonal: Boolean(props.discount?.is_seasonal ?? true),
-    loyalty_reward: Boolean(props.discount?.loyalty_reward ?? false)
+    loyalty_reward: Boolean(props.discount?.loyalty_reward ?? false),
+    is_active: Boolean(props.discount?.is_active ?? true)
 });
 const
     isSaving = ref(false),

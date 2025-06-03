@@ -3,7 +3,7 @@
 <template>
     <div class="reservation-form-wrapper" v-if="showCreateForm">
         <el-form id="reservation_form" label-position="top" class="styled-form">
-            <el-form-item label="Start date">
+            <el-form-item :label="$t('reservations.form.start_date')">
                 <el-date-picker
                     type="date"
                     id="reservation_start"
@@ -15,7 +15,7 @@
                 <span class="error" v-if="error.start">{{ error.start }}</span>
             </el-form-item>
 
-            <el-form-item label="End date">
+            <el-form-item :label="$t('reservations.form.end_date')">
                 <el-date-picker
                     type="date"
                     id="reservation_end"
@@ -34,16 +34,16 @@
                     text
                     @click="advancedReservation = !advancedReservation"
                 >
-                    {{ advancedReservation ? 'Hide advanced settings' : 'Show advanced settings' }}
+                    {{ advancedReservation ? $t('reservations.form.advanced.hide') : $t('reservations.form.advanced.show') }}
                 </el-button>
             </div>
 
             <div v-if="advancedReservation">
-                <el-form-item label="Choose room for me">
-                    <el-checkbox id="choice" v-model="form.choice">Auto assign room</el-checkbox>
+                <el-form-item>
+                    <el-checkbox id="choice" v-model="form.choice">{{ $t('reservations.form.advanced.auto_assign') }}</el-checkbox>
                 </el-form-item>
 
-                <el-form-item label="Room number">
+                <el-form-item :label="$t('reservations.form.advanced.room_number')">
                     <el-input-number
                         id="room_id"
                         :disabled="form.choice"
@@ -62,33 +62,33 @@
                     :disabled="awaitingServerResponse"
                     style="color: black"
                 >
-                    Check availability
+                    {{ $t('reservations.form.check_availability') }}
                 </el-button>
             </div>
         </el-form>
     </div>
 
     <div class="grid1" v-if="showConfirmForm">
-        <p>This Room fits your requests!</p>
+        <p>{{ $t('reservations.form.available') }}</p>
         <p>
-            Room: <span :style="{color: 'red'}">{{ availableReservation.room_number }} </span>,
-            Floor: <span :style="{color: 'red'}">{{ availableReservation.floor }}</span>,
-            Days: <span :style="{color: 'red'}">{{ availableReservation.days_amount }}</span> day(s).
+            {{ $t('reservations.form.room') }}: <span :style="{color: 'red'}">{{ availableReservation.room_number }} </span>,
+            {{ $t('reservations.form.floor') }}: <span :style="{color: 'red'}">{{ availableReservation.floor }}</span>,
+            {{ $t('reservations.form.days') }}: <span :style="{color: 'red'}">{{ availableReservation.days_amount }}</span> {{ $t('reservations.form.days_amount') }}.
         </p>
-        <p>Price: <span :style="{color: 'red'}">{{ availableReservation.price }} </span>UAH.</p>
-        <p>(Price can be lowered in payment process if you have discounts on your account)</p>
+        <p>{{ $t('reservations.form.price') }}: <span :style="{color: 'red'}">{{ availableReservation.price }} </span>{{ $t('reservations.form.uah') }}.</p>
+        <p>{{ $t('reservations.form.discount_message') }}</p>
         <div class="flex_center">
             <button
                 @click="createOrUpdateReservation"
                 :disabled="awaitingServerResponse"
             >
-                {{ props.updateMode ? 'Update' : 'Create' }}
+                {{ props.updateMode ? $t('reservations.form.update') : $t('reservations.form.create') }}
             </button>
             <button
                 @click="changeReservation"
                 :disabled="awaitingServerResponse"
             >
-                Change
+                {{ $t('reservations.form.change') }}
             </button>
         </div>
     </div>
@@ -118,11 +118,11 @@ const props = defineProps({
 
 // vars
 const form = ref({
-    room_number: props.reservation.room.number ?? 0,
-    reservation_start: props.reservation.reservation_start ?? '',
-    reservation_end: props.reservation.reservation_end ?? '',
-    user_id: props.reservation.user_id ?? localStorage.getItem('credentials'),
-    choice: Boolean(!props.reservation.room.number ?? true),
+    room_number: props.reservation?.room.number ?? 0,
+    reservation_start: props.reservation?.reservation_start ?? '',
+    reservation_end: props.reservation?.reservation_end ?? '',
+    user_id: props.reservation?.user_id ?? localStorage.getItem('credentials'),
+    choice: Boolean(!props.reservation?.room.number ?? true),
 });
 const
     showCreateForm = ref(true),
@@ -214,8 +214,6 @@ function changeReservation() {
     margin-top: 1.5rem;
 }
 
-/* Кнопки */
-.el-button,
 button {
     margin: 10px;
     padding: 10px 20px;
@@ -224,20 +222,12 @@ button {
     transition: background-color 0.2s ease;
 }
 
-.el-button:hover,
-button:hover {
-    background-color: rgba(26, 197, 60, 0.4) !important;
-    color: black;
-}
-
-/* Ошибки */
 .error {
     color: #f56c6c;
     font-size: 12px;
     margin-top: 4px;
 }
 
-/* Форма */
 #reservation_form {
     background-color: #ffffff;
     padding: 24px;
@@ -277,9 +267,5 @@ button:hover {
 
 .toggle-btn {
     font-weight: bold;
-}
-
-.el-form-item {
-    margin-bottom: 1rem;
 }
 </style>

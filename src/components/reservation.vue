@@ -105,7 +105,7 @@
     </div>
     
     <div class="bubble" v-else>
-        <p>Loading...</p>
+        <Loading/>
     </div>
 </template>
 <script>
@@ -113,8 +113,10 @@ import formValidation from '@/mixins/validator';
 import { useReservationStore } from '@/stores/reservationStore';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import Loading from "@/components/Loading.vue";
 
 export default {
+    components: {Loading},
     setup() {
         const route = useRoute();
 

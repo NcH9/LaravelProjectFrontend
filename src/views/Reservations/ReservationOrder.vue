@@ -4,7 +4,7 @@
     <el-card class="discount-card" shadow="hover">
         <template #header>
             <div class="card-header">
-                <span>Discounts for this order</span>
+                <span>{{ $t('reservations.discounts.title') }}</span>
             </div>
         </template>
 
@@ -26,7 +26,7 @@
         </div>
 
         <div v-else class="empty-state">
-            <el-empty description="No discounts applied." />
+            <el-empty :description="$t('reservations.discounts.empty')" />
         </div>
     </el-card>
 </template>

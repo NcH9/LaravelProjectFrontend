@@ -1,8 +1,14 @@
 <template>
-    <RouterLink v-if="isLoggedIn" :to="{name: 'profile'}">Profile</RouterLink>
+    <RouterLink
+        v-if="isLoggedIn"
+        :to="{name: 'profile'}"
+        class="flex_center"
+    >
+        {{$t('auth.profile')}}
+    </RouterLink>
     <div v-if="!isLoggedIn" class="flex_center">
-        <RouterLink :to="{name: 'register'}">Register</RouterLink>
-        <RouterLink :to="{name: 'login'}">Login</RouterLink>
+        <RouterLink :to="{name: 'register'}">{{ $t('auth.register') }}</RouterLink>
+        <RouterLink :to="{name: 'login'}">{{ $t('auth.login') }}</RouterLink>
     </div>
 </template>
 <script setup>

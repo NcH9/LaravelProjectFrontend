@@ -4,18 +4,18 @@
             <div class="grid1" v-if="reservations.length >= 10">
                 <div class="flex_center">
                     <div class="flex_center">
-                        <button @click="prevPage" :disabled="!prevPageUrl">Previous</button>
+                        <button @click="prevPage" :disabled="!prevPageUrl">{{ $t('sort.previous') }}</button>
                     </div>
                     <span>Page {{ currentPage }} of {{ totalPages }}</span>
                     <div class="flex_center">
-                        <button @click="nextPage" :disabled="!nextPageUrl">Next</button>
+                        <button @click="nextPage" :disabled="!nextPageUrl">{{ $t('sort.next') }}</button>
                     </div>
                     </div>
-                    <div class="flex_center">
-                        <button @click="sortData('room_id')">Sort by room</button>
-                        <button @click="sortData('reservation_start')">Sort by start date</button>
-                        <button @click="sortData('reservation_end')">Sort by end date</button>
-                    </div>
+<!--                    <div class="flex_center">-->
+<!--                        <button @click="sortData('room_id')">Sort by room</button>-->
+<!--                        <button @click="sortData('reservation_start')">Sort by start date</button>-->
+<!--                        <button @click="sortData('reservation_end')">Sort by end date</button>-->
+<!--                    </div>-->
                 </div>
                 <div v-for="reservation in reservations" :key="reservation.id">
                     <ReservationItem
@@ -26,14 +26,14 @@
             </div>
             <div class="flex_center" v-else>
             <p>
-                You have no reservations yet.
+                {{ $t('reservations.no_reservations') }}
             </p>
         </div>
     </div>
 
     <div v-else class="right_bubble">
         <div class="flex_center">
-            <p>Loading...</p>
+            <Loading/>
         </div>
     </div>
 </template>
@@ -43,6 +43,7 @@ import {onMounted, ref} from "vue";
 import {useReservationStore} from "@/stores/reservationStore.js";
 import {useRoute} from "vue-router";
 import ReservationItem from "@/views/Reservations/ReservationItem.vue";
+import Loading from "@/components/Loading.vue";
 
 const isLoading = ref(true);
 const

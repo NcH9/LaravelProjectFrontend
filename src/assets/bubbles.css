@@ -31,7 +31,6 @@
     padding: 15px;
     margin: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Courier New', Courier, monospace;
 }
 .right_bubble button {
     background-color: rgb(255, 255, 255);
@@ -47,7 +46,6 @@
 .right_bubble a {
     text-decoration: none;
     color: rgba(0, 0, 0, 0.75);
-    font-family: 'Courier New', Courier, monospace;
 }
 .right_bubble button:hover {
     background-color: rgb(219, 219, 219);

@@ -2,6 +2,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { i18n} from "@/i18n.js";
 
 import App from './App.vue'
 import router from './router'
@@ -28,6 +29,7 @@ channel.bind('report.generated', function(data) {
     }
 });
 app.use(createPinia())
+app.use(i18n)
 app.use(ElementPlus)
 app.use(router)
 
