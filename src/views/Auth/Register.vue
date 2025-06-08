@@ -1,52 +1,65 @@
 <template>
     <div>
-    <h2 class="flex_center">Register</h2>
-    <form @submit.prevent="validateForm" class="register">
-        <div class="grid1">
-            <div class="flex_center">
-                <label for="name">Name:</label>
-                <input v-model.lazy="form.name" @blur="validateUsername(form.name)" type="text" id="name" />
-            </div>
-            <span class="error" v-if="error.username">{{ error.username }}</span>
-            <span class="error" v-if="errors.name">{{ errors.name }}</span>
-        </div>
+    <h2 class="flex_center">{{ $t('auth.register') }}</h2>
+    <el-form class="register">
+        <el-form-item
+            :label="$t('auth.username')"
+            :error="error.username || errors.name"
+        >
+            <el-input
+                v-model.lazy="form.name"
+                @blur="validateUsername(form.name)"
+                type="text"
+                id="name"
+                placeholder="Ім’я"
+            />
+        </el-form-item>
 
-        <div class="grid1">
-            <div class="flex_center">
-                <label for="email">Email:</label>
-                <input v-model.lazy="form.email" @blur="validateEmail(form.email)" type="email" id="email" />
-            </div>
-            <span class="error" v-if="error.email">{{ error.email }}</span>
-            <span class="error" v-if="errors.email">{{ errors.email }}</span>
-        </div>
-        
+        <el-form-item
+            :label="$t('auth.email')"
+            :error="error.email || errors.email"
+        >
+            <el-input
+                v-model.lazy="form.email"
+                @blur="validateEmail(form.email)"
+                type="email"
+                id="email"
+                placeholder="email@example.com"
+            />
+        </el-form-item>
 
-        <div class="grid1">
-            <div class="flex_center">
-                <label for="password">Password:</label>
-                <input v-model.lazy="form.password" @blur="validatePassword(form.password)" type="password" id="password" />
-            </div>
-            <span class="error" v-if="error.password">{{ error.password }}</span>
-            <span class="error" v-if="errors.password">{{ errors.password }}</span>
-        </div>
+        <el-form-item
+            :label="$t('auth.password')"
+            :error="error.password || errors.password"
+        >
+            <el-input
+                v-model.lazy="form.password"
+                @blur="validatePassword(form.password)"
+                type="password"
+                id="password"
+                show-password
+                placeholder="********"
+            />
+        </el-form-item>
 
-        <div class="grid1">
-            <div class="flex_center">  
-                <label for="password_confirmation">Confirm Password:</label>
-                <input 
-                    v-model.lazy="form.password_confirmation" 
-                    @blur="validatePasswordConfirmation(form.password, form.password_confirmation)" 
-                    type="password" 
-                    id="password_confirmation" 
-                />
-            </div>
-            <span class="error" v-if="error.password_confirmation">{{ error.password_confirmation }}</span>
-            <span class="error" v-if="errors.password_confirmation">{{ errors.password_confirmation }}</span>
-        </div>
+        <el-form-item
+            :label="$t('auth.confirm_password')"
+            :error="error.password_confirmation || errors.password_confirmation"
+        >
+            <el-input
+                v-model.lazy="form.password_confirmation"
+                @blur="validatePasswordConfirmation(form.password, form.password_confirmation)"
+                type="password"
+                id="password_confirmation"
+                show-password
+                placeholder="********"
+            />
+        </el-form-item>
 
-        <button class="flex_center" type="submit" id="registerbtn">Register</button>
-        <p class="success" v-if="successMessage">{{ successMessage }}</p>
-    </form>
+        <div class="flex_center">
+            <el-button class="flex_center" @click="validateForm" id="registerbtn">{{ $t('auth.register') }}</el-button>
+        </div>
+    </el-form>
   </div>
 </template>
 <script>

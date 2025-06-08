@@ -3,9 +3,26 @@
         <div class="flex_between">
             <nav class="flex_between">
                 <RouterLink class="flex_center" to="/">{{ $t('home.title') }}</RouterLink>
-                <RouterLink class="flex_center" to="/reservations">{{ $t('reservations.title') }}</RouterLink>
-                <RouterLink class="flex_center" to="/housekeeping">{{ $t('housekeeping.title') }}</RouterLink>
-                <RouterLink class="flex_center" to="/finances">{{ $t('finances.title') }}</RouterLink>
+                <RouterLink
+                    v-if="isLoggedIn"
+                    class="flex_center"
+                    to="/reservations"
+                >
+                    {{ $t('reservations.title') }}
+                </RouterLink>
+                <RouterLink
+                    class="flex_center"
+                    to="/housekeeping"
+                >
+                    {{ $t('housekeeping.title') }}
+                </RouterLink>
+                <RouterLink
+                    v-if="isLoggedIn"
+                    class="flex_center"
+                    to="/finances"
+                >
+                    {{ $t('finances.title') }}
+                </RouterLink>
             </nav>
             <nav class="flex_between">
                 <auth></auth>
@@ -35,6 +52,7 @@ import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
 const isUa = ref(locale.value === 'uk')
+const isLoggedIn = ref(!!localStorage.getItem('authToken'))
 
 const elementLocale = computed(() => (isUa.value ? uk : en))
 

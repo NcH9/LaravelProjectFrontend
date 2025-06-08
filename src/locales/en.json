@@ -88,13 +88,18 @@
     }
   },
   "auth": {
+    "label": "Login",
     "login": "Login",
+    "login_success": "Login Successful!",
     "register": "Register",
+    "register_success": "Register Successful!",
     "logout": "Sign Out",
     "profile": "Profile",
     "your_account_label": "Your Account",
     "info": "Your Account Info",
     "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
     "username": "Username",
     "roles": {
       "label": "Roles",
@@ -103,7 +108,7 @@
     }
   },
   "about": {
-    "title": "About"
+    "title": "About us page"
   },
   "sort": {
     "page": "Page",

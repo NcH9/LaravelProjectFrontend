@@ -1,29 +1,33 @@
 <template>
     <div class="grid1">
-    <h2 class="flex_center">Login</h2>
-    <form @submit.prevent="validateForm" class="login">
-        <div class="grid1">
-            <div class="flex_center">
-                <label for="email">Email:</label>
-                <input type="email" id="email" v-model.lazy="form.email" @blur="validateEmail(form.email)" />
-            </div>
-            <span class="error" v-if="error.email">{{ error.email }}</span>
-        </div>
+    <h2 class="flex_center">{{ $t('auth.label') }}</h2>
+    <el-form class="login">
+        <el-form label-position="top" :model="form" class="form-grid">
+            <el-form-item :label="$t('auth.email')" :error="error.email">
+                <el-input
+                    type="email"
+                    v-model.lazy="form.email"
+                    @blur="validateEmail(form.email)"
+                    placeholder="example@email.com"
+                />
+            </el-form-item>
 
-        <div class="grid1">
-            <div class="flex_center">
-                <label for="password">Password:</label>
-                <input type="password" id="password" v-model.lazy="form.password" @blur="validatePassword(form.password)"/>
-            </div>
-            <span class="error" v-if="error.password">{{ error.password }}</span>
-        </div>
+            <el-form-item :label="$t('auth.password')" :error="error.password">
+                <el-input
+                    type="password"
+                    v-model.lazy="form.password"
+                    @blur="validatePassword(form.password)"
+                    show-password
+                />
+            </el-form-item>
+        </el-form>
 
         <div class="flex_center">
-            <button id="loginbtn" type="submit">Login</button>
+            <el-button id="loginbtn" @click="validateForm">{{ $t('auth.login') }}</el-button>
         </div>
         <p class="error" v-if="errorMsg">{{ errorMsg }}</p>
         <p class="success" v-if="successMessage">{{ successMessage }}</p>
-    </form>
+    </el-form>
   </div>
 </template>
 

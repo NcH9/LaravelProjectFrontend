@@ -8,7 +8,7 @@
   "reservations": {
     "title": "Бронювання",
     "reserve_link": "Забронювати Кімнату",
-    "no_reservations": "У вас ще нема бронювань",
+    "no_reservations": "У вас поки що немає бронювань",
     "item": {
       "room": "Кімната",
       "by": "",
@@ -88,13 +88,18 @@
     }
   },
   "auth": {
+    "label": "Логін",
     "login": "Увійти",
+    "login_success": "Залогінено!",
+    "register_success": "Реєстрація успішна!",
     "register": "Зареєструватися",
     "logout": "Вийти",
     "profile": "Профіль",
     "your_account_label": "Ваш обліковий запис",
     "info": "Інформація про обліковий запис",
     "email": "Електронна пошта",
+    "password": "Пароль",
+    "confirm_password": "Підтвердити пароль",
     "username": "Ім’я користувача",
     "roles": {
       "label": "Ролі",
